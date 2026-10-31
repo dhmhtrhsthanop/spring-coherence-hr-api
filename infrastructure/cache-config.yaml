@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cache-config
+  namespace: coherence
+data:
+  coherence-cache-config.xml: |
+    <?xml version="1.0"?>
+    <cache-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config">
+                  
+      <caching-scheme-mapping>
+        <cache-mapping>
+          <cache-name>Employees</cache-name>
+          <scheme-name>distributed-scheme</scheme-name>
+        </cache-mapping>
+        <cache-mapping>
+          <cache-name>Departments</cache-name>
+          <scheme-name>distributed-scheme</scheme-name>
+        </cache-mapping>
+      </caching-scheme-mapping>
+
+      <caching-schemes>
+        <distributed-scheme>
+          <scheme-name>distributed-scheme</scheme-name>
+          <service-name>PartitionedCache</service-name>
+          <backing-map-scheme>
+            <local-scheme/>
+          </backing-map-scheme>
+          <autostart>true</autostart>
+        </distributed-scheme>
+
+        <proxy-scheme>
+          <scheme-name>proxy-scheme</scheme-name>
+          <service-name>Proxy</service-name>
+          <acceptor-config>
+            <tcp-acceptor>
+              <local-address>
+                <address>172.18.0.5</address>
+                <port>20000</port>
+              </local-address>
+            </tcp-acceptor>
+          </acceptor-config>
+          <autostart>true</autostart>
+        </proxy-scheme>
+      </caching-schemes>
+    </cache-config>

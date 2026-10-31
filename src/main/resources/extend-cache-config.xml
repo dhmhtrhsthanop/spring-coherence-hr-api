@@ -1,0 +1,36 @@
+<cache-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config"
+              xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config coherence-cache-config.xsd">
+
+    <caching-scheme-mapping>
+        <cache-mapping>
+            <cache-name>Employees</cache-name>
+            <scheme-name>remote-extend-scheme</scheme-name>
+        </cache-mapping>
+        <cache-mapping>
+            <cache-name>Departments</cache-name>
+            <scheme-name>remote-extend-scheme</scheme-name>
+        </cache-mapping>
+    </caching-scheme-mapping>
+
+    <caching-schemes>
+        <remote-cache-scheme>
+            <scheme-name>remote-extend-scheme</scheme-name>
+            <service-name>Proxy</service-name>
+            <initiator-config>
+                <tcp-initiator>
+                    <remote-addresses>
+                        <socket-address>
+                            <address>127.0.0.1</address>
+                            <port>20000</port>
+                        </socket-address>
+                    </remote-addresses>
+                </tcp-initiator>
+                <outgoing-message-handler>
+                    <request-timeout>5s</request-timeout>
+                </outgoing-message-handler>
+            </initiator-config>
+        </remote-cache-scheme>
+    </caching-schemes>
+
+</cache-config>

@@ -1,0 +1,18 @@
+apiVersion: coherence.oracle.com/v1
+kind: Coherence
+metadata:
+  name: data-cluster
+spec:
+  image: coherence22.06-entitiesjar
+  replicas: 2
+  coherence:
+    storageEnabled: true
+    cacheConfig: /custom-config/coherence-cache-config.xml
+    
+  ports:
+    - name: extend
+      port: 20000
+      
+  configMapVolumes:
+    - name: cache-config
+      mountPath: /custom-config
