@@ -2,8 +2,9 @@ apiVersion: coherence.oracle.com/v1
 kind: Coherence
 metadata:
   name: data-cluster
+  namespace: coherence
 spec:
-  image: coherence22.06-entitiesjar
+  image: ghcr.io/oracle/coherence-ce:22.06
   replicas: 2
   coherence:
     storageEnabled: true
